@@ -1,0 +1,1 @@
+add_executable(Test WIN32 Test.cpp)
