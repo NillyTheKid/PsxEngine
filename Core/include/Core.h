@@ -2,6 +2,8 @@
 #define CORE
 class Rendering;
 
+union SDL_Event;
+
 class Core
 {
 public:
@@ -15,6 +17,12 @@ public:
 	void Run();
 
 	Rendering* CreateRenderer();
+
+public:
+	void Quit();
+
+private:
+	void ParseEvent(SDL_Event& e);
 private:
 	Rendering* _rendering;
 

@@ -3,6 +3,7 @@
 
 Rendering::Rendering()
 	:_activeWindows{}
+	,_closeWindowCallbacks{}
 {
 
 }
@@ -21,4 +22,22 @@ SDL_Window* Rendering::createWindow(char* title, int x, int y, int width, int he
 	SDL_Window* result = SDL_CreateWindow(title, x, y, width, height, flags);
 	_activeWindows.push_back(result);
 	return result;
+}
+
+void Rendering::RegisterWindowCallback(SDL_Window* window, std::function<void()> function)
+{
+	uint32_t windowId = SDL_GetWindowID(window);
+	_closeWindowCallbacks.emplace(windowId, function);
+}
+
+
+void Rendering::ParseWindowEvent(SDL_WindowEvent& e)
+{
+	switch (e.event)
+	{
+	case SDL_WINDOWEVENT_CLOSE:
+	{
+		_closeWindowCallbacks[e.windowID]();
+	} break;
+	}
 }
