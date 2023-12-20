@@ -25,12 +25,15 @@ void Window::setBackgroundColour(Colour c)
 
 void Window::StartRendering(void* context)
 {
-	SDL_GL_MakeCurrent(_pWindow, context);
+	int result = SDL_GL_MakeCurrent(_pWindow, context);
+	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 	glClearColor(_backgroundColour.r, _backgroundColour.g, _backgroundColour.b, _backgroundColour.a);
 	glClear(GL_COLOR_BUFFER_BIT);
+
 }
 void Window::FinishRendering()
 {
+	glFinish();
 	SDL_GL_SwapWindow(_pWindow);
 }
 void Window::CloseWindow()

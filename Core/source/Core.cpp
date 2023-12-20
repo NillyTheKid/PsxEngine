@@ -24,8 +24,12 @@ void Core::Run()
 	SDL_Event event;
 	while (_isRunning)
 	{
-		SDL_PollEvent(&event);
-		ParseEvent(event);
+		while (SDL_PollEvent(&event))
+		{
+			ParseEvent(event);
+		}
+
+		_rendering->Render();
 	}
 }
 

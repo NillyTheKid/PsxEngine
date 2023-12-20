@@ -25,6 +25,7 @@ public:
 	//NOTE: Only call this function from Window class
 	void RemoveWindow(Window* window);
 
+	void Render();
 	void ParseWindowEvent(SDL_WindowEvent& e);
 
 private:

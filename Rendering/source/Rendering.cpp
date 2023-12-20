@@ -18,10 +18,10 @@ Rendering::~Rendering()
 		delete window;
 	}
 
-	delete _pContext;
+	SDL_GL_DeleteContext(_pContext);
+	//delete _pContext;
 }
 
-//TODO: Add renderer creation option/main window option
 Window* Rendering::createWindow(char* title, int x, int y, int width, int height, uint32_t flags)
 {
 	Window* result = new Window(this, title, x, y, width, height, flags);
@@ -49,6 +49,16 @@ void Rendering::RemoveWindow(Window* window)
 {
 	_activeWindows.erase(std::remove(_activeWindows.begin(), _activeWindows.end(), window), _activeWindows.end());
 	_closeWindowCallbacks.erase(window->getId());
+}
+
+void Rendering::Render()
+{
+	for (Window* window : _activeWindows)
+	{
+		window->StartRendering(_pContext);
+		//TODO: Render components attached to this window
+		window->FinishRendering();
+	}
 }
 
 void Rendering::ParseWindowEvent(SDL_WindowEvent& e)
