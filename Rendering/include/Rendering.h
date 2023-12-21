@@ -12,27 +12,24 @@ class Rendering
 {
 public:
 	Rendering();
-	~Rendering();
+	virtual ~Rendering();
 	Rendering(const Rendering& other) = delete;
 	Rendering(Rendering&& other) = delete;
 	Rendering& operator=(const Rendering& other) = delete;
 	Rendering& operator=(Rendering&& other) = delete;
 
-	Window* createWindow(char* title, int x, int y, int width, int height, uint32_t flags);
+	virtual Window* createWindow(char* title, int x, int y, int width, int height, uint32_t flags) = 0;
 	void* createGlContext(Window* mainWindow);
-	void RegisterWindowCallback(Window* window, std::function<void()> function);
+	virtual void RegisterWindowCallback(Window* window, std::function<void()> function) = 0;
 
 	//NOTE: Only call this function from Window class
-	void RemoveWindow(Window* window);
+	virtual void RemoveWindow(Window* window) = 0;
 
-	void Render();
-	void ParseWindowEvent(SDL_WindowEvent& e);
+	virtual void Render() = 0;
+	virtual void ParseWindowEvent(SDL_WindowEvent& e) = 0;
 
-private:
+protected:
 	void* _pContext;
-
-	std::vector<Window*> _activeWindows;
-	std::map<uint32_t, std::function<void()>> _closeWindowCallbacks;
 };
 
 #endif

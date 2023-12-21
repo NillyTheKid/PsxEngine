@@ -23,9 +23,12 @@ void Window::setBackgroundColour(Colour c)
 	_backgroundColour = c;
 }
 
-void Window::StartRendering(void* context)
+void Window::StartRendering(void* context, bool isToolRenderer)
 {
-	int result = SDL_GL_MakeCurrent(_pWindow, context);
+	if (isToolRenderer)
+	{
+		SDL_GL_MakeCurrent(_pWindow, context);
+	}
 	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 	glClearColor(_backgroundColour.r, _backgroundColour.g, _backgroundColour.b, _backgroundColour.a);
 	glClear(GL_COLOR_BUFFER_BIT);

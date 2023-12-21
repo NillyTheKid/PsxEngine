@@ -17,7 +17,7 @@ public:
 
 	void setBackgroundColour(Colour c);
 
-	void StartRendering(void* context);
+	void StartRendering(void* context, bool isToolRenderer);
 	void FinishRendering();
 	void CloseWindow();
 

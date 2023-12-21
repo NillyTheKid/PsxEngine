@@ -1,5 +1,6 @@
 #include "Core.h"
-#include "Rendering.h"
+#include "ToolRendering.h"
+#include "GameRendering.h"
 #pragma warning(disable:26451)
 #include <SDL.h>
 
@@ -33,10 +34,17 @@ void Core::Run()
 	}
 }
 
-Rendering* Core::CreateRenderer()
+Rendering* Core::CreateRenderer(bool isGameRenderer)
 {
 	SDL_InitSubSystem(SDL_INIT_VIDEO);
-	_rendering = new Rendering();
+	if (isGameRenderer)
+	{
+		_rendering = new GameRendering();
+	}
+	else
+	{
+		_rendering = new ToolRendering();
+	}
 	return _rendering;
 }
 

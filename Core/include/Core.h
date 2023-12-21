@@ -16,7 +16,7 @@ public:
 
 	void Run();
 
-	Rendering* CreateRenderer();
+	Rendering* CreateRenderer(bool isGameRenderer = true);
 
 public:
 	void Quit();
