@@ -1,18 +1,18 @@
-#ifndef CORE
-#define CORE
+#ifndef ENGINE
+#define ENGINE
 class Rendering;
 
 union SDL_Event;
 
-class Core
+class Engine
 {
 public:
-	Core();
-	~Core();
-	Core(const Core& other) = delete;
-	Core(Core&& other) = delete;
-	Core& operator=(const Core& other) = delete;
-	Core& operator=(Core&& other) = delete;
+	Engine();
+	~Engine();
+	Engine(const Engine& other) = delete;
+	Engine(Engine&& other) = delete;
+	Engine& operator=(const Engine& other) = delete;
+	Engine& operator=(Engine&& other) = delete;
 
 	void Run();
 

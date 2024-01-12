@@ -1,4 +1,4 @@
-#include "Core.h"
+#include "Engine.h"
 #include "ToolRendering.h"
 #include "GameRendering.h"
 #pragma warning(disable:26451)
@@ -8,19 +8,19 @@ namespace
 {
 }
 
-Core::Core()
+Engine::Engine()
 	:_isRunning{true}
 	,_rendering(nullptr)
 {
 }
 
-Core::~Core()
+Engine::~Engine()
 {
 	SDL_Quit();
 	delete _rendering;
 }
 
-void Core::Run()
+void Engine::Run()
 {
 	SDL_Event event;
 	while (_isRunning)
@@ -34,7 +34,7 @@ void Core::Run()
 	}
 }
 
-Rendering* Core::CreateRenderer(bool isGameRenderer)
+Rendering* Engine::CreateRenderer(bool isGameRenderer)
 {
 	SDL_InitSubSystem(SDL_INIT_VIDEO);
 	if (isGameRenderer)
@@ -48,12 +48,12 @@ Rendering* Core::CreateRenderer(bool isGameRenderer)
 	return _rendering;
 }
 
-void Core::Quit()
+void Engine::Quit()
 {
 	_isRunning = false;
 }
 
-void Core::ParseEvent(SDL_Event& e)
+void Engine::ParseEvent(SDL_Event& e)
 {
 	switch (e.type)
 	{
