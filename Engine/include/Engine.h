@@ -1,6 +1,7 @@
 #ifndef ENGINE
 #define ENGINE
 class Rendering;
+class Input;
 
 union SDL_Event;
 
@@ -17,6 +18,7 @@ public:
 	void Run();
 
 	Rendering* CreateRenderer(bool isGameRenderer = true);
+	Input* CreateInput();
 
 public:
 	void Quit();
@@ -25,6 +27,7 @@ private:
 	void ParseEvent(SDL_Event& e);
 private:
 	Rendering* _rendering;
+	Input* _input;
 
 	bool _isRunning;
 };

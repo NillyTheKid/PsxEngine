@@ -4,14 +4,32 @@
 
 #include "Engine.h"
 #include "Rendering.h"
+#include "Input.h"
 #pragma warning(disable:26451)
 #include <SDL.h>
 #include <functional>
 #include "Window.h"
 
+#include <iostream>
+
 namespace
 {
 	bool toolTest = false;
+
+	void PrintSpace()
+	{
+		std::cout << "Space\n";
+	}
+
+	void PrintStartLeft()
+	{
+		std::cout << "Start Left\n";
+	}
+
+	void PrintStopLeft()
+	{
+		std::cout << "Stop Left\n";
+	}
 }
 
 int main(int argc, char* argv[])
@@ -19,7 +37,21 @@ int main(int argc, char* argv[])
 	//Have this in separate scope so all destructors are called before dumping memory leaks
 	{
 		Engine engine{};
-		Rendering* rendering = engine.CreateRenderer(!toolTest);		
+		Rendering* rendering = engine.CreateRenderer(!toolTest);
+		Input* input = engine.CreateInput();
+
+		//Register input
+		{
+			auto spaceFuncId = input->RegisterFunction(std::bind(&PrintSpace));
+			auto startLeftFuncId = input->RegisterFunction(std::bind(&PrintStartLeft));
+			auto stopLeftFuncId = input->RegisterFunction(std::bind(&PrintStopLeft));
+
+			input->MapKeyboardFunction(SDL_SCANCODE_SPACE, spaceFuncId);
+			input->MapKeyboardFunction(SDL_SCANCODE_A, startLeftFuncId, false);
+			input->MapKeyboardFunction(SDL_SCANCODE_LEFT, startLeftFuncId, false);
+			input->MapKeyboardFunction(SDL_SCANCODE_A, stopLeftFuncId, true);
+			input->MapKeyboardFunction(SDL_SCANCODE_LEFT, stopLeftFuncId, true);
+		}
 
 		auto testWindow = rendering->createWindow("Test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1280, 720, SDL_WINDOW_OPENGL);
 		testWindow->setBackgroundColour(Colour(0.0f, 0.0f, 0.0f, 1.0f));
