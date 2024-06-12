@@ -10,6 +10,10 @@
 #include <functional>
 #include "Window.h"
 
+#include "Scene.h"
+#include "Entity.h"
+#include "TestComponent.h"
+
 #include <iostream>
 
 namespace
@@ -65,6 +69,13 @@ int main(int argc, char* argv[])
 			testWindow2->setBackgroundColour(Colour(1.0f, 0.0f, 0.0f, 1.0f));
 			rendering->RegisterWindowCallback(testWindow2, std::bind(&Window::CloseWindow, testWindow2));
 		}
+
+		Scene testScene{};
+		Entity* testEntity = testScene.CreateEntity();
+		TestComponent* testComp = testEntity->CreateComponent<TestComponent>();
+
+		testComp->SetData(5);
+
 
 		engine.Run();
 	}

@@ -5,7 +5,7 @@ class Component
 {
 public:
 	Component();
-	~Component();
+	virtual ~Component();
 	Component(const Component& other) = delete;
 	Component operator=(const Component& other) = delete;
 	Component(Component&& other) = delete;

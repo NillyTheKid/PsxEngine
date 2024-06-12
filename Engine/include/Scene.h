@@ -14,8 +14,10 @@ public:
 	Scene(Scene&& other) = delete;
 	Scene operator=(Scene&& other) = delete;
 
+	Entity* CreateEntity();
+
 private:
-	std::vector<Entity> _entities;
+	std::vector<Entity*> _pEntities;
 };
 
 #endif
