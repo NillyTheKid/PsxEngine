@@ -2,6 +2,7 @@
 #include "ToolRendering.h"
 #include "GameRendering.h"
 #include "Input.h"
+#include "ECS.h"
 #pragma warning(disable:26451)
 #include <SDL.h>
 
@@ -15,6 +16,7 @@ Engine::Engine()
 	:_isRunning{true}
 	,_rendering(nullptr)
 	,_input(nullptr)
+	,_ecs(nullptr)
 {
 }
 
@@ -23,6 +25,7 @@ Engine::~Engine()
 	SDL_Quit();
 	delete _rendering;
 	delete _input;
+	delete _ecs;
 }
 
 void Engine::Run()
@@ -64,6 +67,16 @@ Input* Engine::CreateInput()
 	}
 
 	return _input;
+}
+
+ECS* Engine::CreateEcs()
+{
+	if (_ecs == nullptr)
+	{
+		_ecs = new ECS();
+	}
+
+	return _ecs;
 }
 
 

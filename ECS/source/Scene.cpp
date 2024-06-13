@@ -1,8 +1,13 @@
 #include "Scene.h"
 #include "Entity.h"
 
+namespace {
+	static std::uint16_t nrScenes = 0;
+}
+
 Scene::Scene()
 	:_pEntities{}
+	,_id{nrScenes++}
 {
 
 }

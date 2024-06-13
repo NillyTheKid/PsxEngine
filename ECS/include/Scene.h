@@ -17,6 +17,7 @@ public:
 	Entity* CreateEntity();
 
 private:
+	std::uint16_t _id;
 	std::vector<Entity*> _pEntities;
 };
 

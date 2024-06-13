@@ -5,6 +5,7 @@
 #include "Engine.h"
 #include "Rendering.h"
 #include "Input.h"
+#include "ECS.h"
 #pragma warning(disable:26451)
 #include <SDL.h>
 #include <functional>
@@ -43,6 +44,7 @@ int main(int argc, char* argv[])
 		Engine engine{};
 		Rendering* rendering = engine.CreateRenderer(!toolTest);
 		Input* input = engine.CreateInput();
+		ECS* ecs = engine.CreateEcs();
 
 		//Register input
 		{

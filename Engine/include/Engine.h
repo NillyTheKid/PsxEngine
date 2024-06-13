@@ -2,6 +2,7 @@
 #define ENGINE
 class Rendering;
 class Input;
+class ECS;
 
 union SDL_Event;
 
@@ -19,6 +20,7 @@ public:
 
 	Rendering* CreateRenderer(bool isGameRenderer = true);
 	Input* CreateInput();
+	ECS* CreateEcs();
 
 public:
 	void Quit();
@@ -28,6 +30,7 @@ private:
 private:
 	Rendering* _rendering;
 	Input* _input;
+	ECS* _ecs;
 
 	bool _isRunning;
 };
