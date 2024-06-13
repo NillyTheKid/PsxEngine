@@ -28,3 +28,13 @@ Entity* Scene::CreateEntity()
 
 	return result;
 }
+
+std::uint16_t Scene::GetId() const
+{
+	return _id;
+}
+
+std::vector<Entity*> Scene::GetEntities() const
+{
+	return _pEntities;
+}

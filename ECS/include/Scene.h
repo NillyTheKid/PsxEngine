@@ -16,8 +16,11 @@ public:
 
 	Entity* CreateEntity();
 
+	std::uint16_t GetId() const;
+	std::vector<Entity*> GetEntities() const;
+
 private:
-	std::uint16_t _id;
+	const std::uint16_t _id;
 	std::vector<Entity*> _pEntities;
 };
 
