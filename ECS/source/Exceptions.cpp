@@ -2,7 +2,7 @@
 #include <string>
 #include <iostream>
 
-LoadException::LoadException(LoadType type, std::uint16_t id)
+LoadException::LoadException(LoadType type, std::uint32_t id)
 	:_type{type}
 	,_id{id}
 {

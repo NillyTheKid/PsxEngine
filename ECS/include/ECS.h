@@ -23,7 +23,7 @@ public:
 private:
 	EntityManager* _pEntityManager;
 
-	std::map<std::uint16_t, std::vector<std::uint16_t>> _loadedScenes;
+	std::map<std::uint16_t, std::vector<std::uint32_t>> _loadedScenes;
 };
 
 #endif

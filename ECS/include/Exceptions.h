@@ -12,7 +12,7 @@ public:
 	};
 
 public:
-	LoadException(LoadType type, std::uint16_t id);
+	LoadException(LoadType type, std::uint32_t id);
 	~LoadException() override;
 	LoadException(const LoadException& other);
 	LoadException operator=(const LoadException& other);
@@ -23,7 +23,7 @@ public:
 
 private:
 	LoadType _type;
-	std::uint16_t _id;
+	std::uint32_t _id;
 };
 
 #endif

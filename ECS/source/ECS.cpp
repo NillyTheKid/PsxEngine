@@ -23,11 +23,11 @@ std::uint16_t ECS::LoadScene(const Scene& scene)
 	if (_loadedScenes.find(sceneId) == _loadedScenes.end())
 	{
 		auto entitiesToload = scene.GetEntities();
-		std::vector<std::uint16_t> loadedEntities{};
+		std::vector<std::uint32_t> loadedEntities{};
 
 		for (int i = 0; i < entitiesToload.size(); i++)
 		{
-			std::uint16_t newEntity = _pEntityManager->CreateEntity();
+			std::uint32_t newEntity = _pEntityManager->CreateEntity();
 			//Load in components to wherever they need to go
 
 			loadedEntities.push_back(newEntity);
@@ -37,7 +37,7 @@ std::uint16_t ECS::LoadScene(const Scene& scene)
 	}
 	else
 	{
-		throw LoadException(LoadException::LoadType::Scene, sceneId);
+		throw LoadException(LoadException::LoadType::Scene, std::uint32_t(sceneId));
 	}
 
 	return sceneId;

@@ -13,19 +13,19 @@ EntityManager::~EntityManager()
 {
 }
 
-std::uint16_t EntityManager::CreateEntity()
+std::uint32_t EntityManager::CreateEntity()
 {
 	if (_unusedIds.empty())
 	{
 		return newId++;
 	}
 
-	std::uint16_t result = _unusedIds.front();
+	std::uint32_t result = _unusedIds.front();
 	_unusedIds.pop();
 	return result;
 }
 
-void EntityManager::DeleteEntity(std::uint16_t id)
+void EntityManager::DeleteEntity(std::uint32_t id)
 {
 	//TODO?: Remove all components attached to this (or have scene unload also tell comp managers to nuke stuff)
 	_unusedIds.push(id);

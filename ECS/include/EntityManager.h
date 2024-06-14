@@ -13,11 +13,11 @@ public:
 	EntityManager(EntityManager&& other) = delete;
 	EntityManager operator=(EntityManager&& other) = delete;
 
-	std::uint16_t CreateEntity();
-	void DeleteEntity(std::uint16_t id);
+	std::uint32_t CreateEntity();
+	void DeleteEntity(std::uint32_t id);
 
 private:
-	std::queue<std::uint16_t> _unusedIds;
+	std::queue<std::uint32_t> _unusedIds;
 };
 
 #endif
