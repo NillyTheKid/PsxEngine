@@ -1,6 +1,6 @@
 #ifndef COMPONENT_MANAGER
 #define COMPONENT_MANAGER
-#include <map>
+#include <vector>
 
 class Component;
 
@@ -15,7 +15,8 @@ public:
 	ComponentManager operator=(ComponentManager&& other) = delete;
 
 private:
-	std::map<std::uint32_t, std::uint32_t> _entityComponentMap;
+	std::vector<std::uint32_t> _entityComponentMap;
+	std::vector<Component*> _pComponents;
 };
 
 #endif

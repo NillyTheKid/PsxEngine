@@ -5,6 +5,7 @@ namespace {
 
 ComponentManager::ComponentManager()
 	:_entityComponentMap{}
+	,_pComponents{}
 {
 }
 ComponentManager::~ComponentManager()
