@@ -8,10 +8,12 @@ public:
 	TestComponent();
 	~TestComponent() override;
 
-	TestComponent(const TestComponent& other) = delete;
+	TestComponent(const TestComponent& other);
 	TestComponent operator=(const TestComponent& other) = delete;
 	TestComponent(TestComponent&& other) = delete;
 	TestComponent operator=(TestComponent&& other) = delete;
+
+	TestComponent* Clone() override;
 
 	void SetData(int data);
 

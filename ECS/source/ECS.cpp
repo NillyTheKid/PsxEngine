@@ -1,17 +1,32 @@
 #include "ECS.h"
 #include "EntityManager.h"
+#include "Entity.h"
 #include "Scene.h"
+#include "ComponentManager.h"
 #include "Exceptions.h"
+#include "Component.h"
+#include "ComponentId.h"
+
+namespace
+{
+
+}
 
 ECS::ECS()
 	:_loadedScenes{}
 	,_pEntityManager{new EntityManager()}
+	,_compManagers{}
 {
 
 }
 ECS::~ECS()
 {
 	//Delete all remaining scenes?
+
+	for (auto it = _compManagers.begin(); it != _compManagers.end(); it++)
+	{
+		delete it->second;
+	}
 
 	delete _pEntityManager;
 }
@@ -28,7 +43,18 @@ std::uint16_t ECS::LoadScene(const Scene& scene)
 		for (int i = 0; i < entitiesToload.size(); i++)
 		{
 			std::uint32_t newEntity = _pEntityManager->CreateEntity();
-			//Load in components to wherever they need to go
+			auto compsToLoad = entitiesToload[i]->GetComponents();
+
+			for (int j = 0; j < compsToLoad.size(); j++)
+			{
+				//check if compManager exists for this type of component
+				auto compManager = _compManagers[compsToLoad[j]->GetTypeId()];
+				if (compManager == nullptr)
+				{
+					compManager = _compManagers[compsToLoad[j]->GetTypeId()] = new ComponentManager();
+				}
+				compManager->LoadComponent(newEntity, compsToLoad[j]);
+			}
 
 			loadedEntities.push_back(newEntity);
 		}
@@ -46,12 +72,17 @@ std::uint16_t ECS::LoadScene(const Scene& scene)
 void ECS::UnloadScene(std::uint16_t id)
 {
 	auto entitiesToRemove = _loadedScenes[id];
+	std::vector<std::uint32_t> removedEntities{};
 
 	for (int i = 0; i < entitiesToRemove.size(); i++)
 	{
 		_pEntityManager->DeleteEntity(entitiesToRemove[i]);
+		removedEntities.push_back(entitiesToRemove[i]);
+	}
 
-		//Remove all components attached to this entity
+	for (auto it = _compManagers.begin(); it != _compManagers.end(); it++)
+	{
+		it->second->UnloadComponents(removedEntities);
 	}
 
 	_loadedScenes.erase(id);

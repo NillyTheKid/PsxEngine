@@ -14,6 +14,8 @@ public:
 	Entity(Entity&& other) = delete;
 	Entity operator=(Entity&& other) = delete;
 
+	std::vector<Component*> GetComponents() const;
+
 	template<class T> T* CreateComponent()
 	{
 		T* result = new T();

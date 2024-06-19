@@ -11,6 +11,8 @@ public:
 	Component(Component&& other) = delete;
 	Component operator=(Component&& other) = delete;
 
+	virtual Component* Clone() = 0;
+
 	unsigned short GetTypeId() const;
 
 private:

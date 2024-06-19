@@ -16,6 +16,11 @@ Entity::~Entity()
 	_pComponents.clear();
 }
 
+std::vector<Component*> Entity::GetComponents() const
+{
+	return _pComponents;
+}
+
 //template<class T> T* Entity::CreateComponent()
 //{
 //	T* result = new T();

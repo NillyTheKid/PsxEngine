@@ -14,6 +14,9 @@ public:
 	ComponentManager(ComponentManager&& other) = delete;
 	ComponentManager operator=(ComponentManager&& other) = delete;
 
+	void LoadComponent(std::uint32_t entity, Component* pComp);
+	void UnloadComponents(const std::vector<std::uint32_t>& entities);
+
 private:
 	std::vector<std::uint32_t> _entityComponentMap;
 	std::vector<Component*> _pComponents;

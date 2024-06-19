@@ -78,19 +78,13 @@ int main(int argc, char* argv[])
 		testComp->SetData(5);
 
 		Scene testScene2{};
+		auto ent2 = testScene2.CreateEntity();
+		auto comp2 = ent2->CreateComponent<TestComponent>();
 		testScene2.CreateEntity();
-		testScene2.CreateEntity();
-
-		Scene testScene3{};
-		testScene3.CreateEntity();
-		testScene3.CreateEntity();
-		testScene3.CreateEntity();
 
 		auto testSceneId = ecs->LoadScene(testScene);
 		auto testScene2Id = ecs->LoadScene(testScene2);
-		auto testScene3Id = ecs->LoadScene(testScene3);
 
-		ecs->UnloadScene(testScene3Id);
 		ecs->UnloadScene(testScene2Id);
 
 		ecs->LoadScene(testScene2);

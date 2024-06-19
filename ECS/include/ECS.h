@@ -6,6 +6,7 @@
 
 class EntityManager;
 class Scene;
+class ComponentManager;
 
 class ECS
 {
@@ -23,6 +24,7 @@ public:
 private:
 	EntityManager* _pEntityManager;
 
+	std::map<std::uint16_t, ComponentManager*> _compManagers;
 	std::map<std::uint16_t, std::vector<std::uint32_t>> _loadedScenes;
 };
 
