@@ -14,6 +14,7 @@
 #include "Scene.h"
 #include "Entity.h"
 #include "TestComponent.h"
+#include "TestSystem.h"
 
 #include <iostream>
 
@@ -71,6 +72,8 @@ int main(int argc, char* argv[])
 			testWindow2->setBackgroundColour(Colour(1.0f, 0.0f, 0.0f, 1.0f));
 			rendering->RegisterWindowCallback(testWindow2, std::bind(&Window::CloseWindow, testWindow2));
 		}
+
+		TestSystem system{};
 
 		Scene testScene{};
 		Entity* testEntity = testScene.CreateEntity();

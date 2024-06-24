@@ -1,6 +1,7 @@
 #ifndef TEST_COMPONENT
 #define TEST_COMPONENT
 #include "Component.h"
+#include "ComponentId.h"
 
 class TestComponent : public Component
 {
@@ -18,7 +19,10 @@ public:
 	void SetData(int data);
 
 private:
+	//static const unsigned short _typeId = GetComponentId<TestComponent>();
 	int _data;
 };
+
+RegisterComponent(TestComponent)
 
 #endif

@@ -1,7 +1,8 @@
 #include "TestComponent.h"
-#include "ComponentId.h"
+//#include "ComponentId.h"
 
-RegisterComponent(TestComponent)
+//RegisterComponent(TestComponent)
+DefineGetComponentId(TestComponent)
 static const unsigned short typeId = GetComponentId<TestComponent>();
 
 TestComponent::TestComponent()
