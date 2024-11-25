@@ -18,10 +18,11 @@ ComponentManager::~ComponentManager()
 	}
 }
 
-void ComponentManager::LoadComponent(std::uint32_t entity, Component* pComp)
+Component* ComponentManager::LoadComponent(std::uint32_t entity, Component* pComp)
 {
 	_pComponents.push_back(pComp->Clone());
 	_entityComponentMap.push_back(entity);
+	return _pComponents.back();
 }
 
 void ComponentManager::UnloadComponents(const std::vector<std::uint32_t>& entities)

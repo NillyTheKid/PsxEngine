@@ -6,6 +6,7 @@
 #include "Exceptions.h"
 #include "Component.h"
 #include "ComponentId.h"
+#include "System.h"
 
 namespace
 {
@@ -16,6 +17,7 @@ ECS::ECS()
 	:_loadedScenes{}
 	,_pEntityManager{new EntityManager()}
 	,_compManagers{}
+	,_pSystems{}
 {
 
 }
@@ -35,6 +37,7 @@ std::uint16_t ECS::LoadScene(const Scene& scene)
 {
 	std::uint16_t sceneId = scene.GetId();
 
+	//Check to see that scene isnt already loaded
 	if (_loadedScenes.find(sceneId) == _loadedScenes.end())
 	{
 		auto entitiesToload = scene.GetEntities();
@@ -53,7 +56,7 @@ std::uint16_t ECS::LoadScene(const Scene& scene)
 				{
 					compManager = _compManagers[compsToLoad[j]->GetTypeId()] = new ComponentManager();
 				}
-				compManager->LoadComponent(newEntity, compsToLoad[j]);
+				Component* loadedComp = compManager->LoadComponent(newEntity, compsToLoad[j]);
 			}
 
 			loadedEntities.push_back(newEntity);

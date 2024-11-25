@@ -8,7 +8,7 @@ public:
 	TestSystem();
 	~TestSystem() override;
 
-	TestSystem(const TestSystem& other);
+	TestSystem(const TestSystem& other) = delete;
 	TestSystem operator=(const TestSystem& other) = delete;
 	TestSystem(TestSystem&& other) = delete;
 	TestSystem operator=(TestSystem&& other) = delete;

@@ -73,7 +73,7 @@ int main(int argc, char* argv[])
 			rendering->RegisterWindowCallback(testWindow2, std::bind(&Window::CloseWindow, testWindow2));
 		}
 
-		TestSystem system{};
+		TestSystem* testSystem = ecs->CreateSystem<TestSystem>();
 
 		Scene testScene{};
 		Entity* testEntity = testScene.CreateEntity();
