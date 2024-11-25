@@ -28,6 +28,8 @@ public:
 	System(System&& other) = delete;
 	System operator=(System&& other) = delete;
 
+	void CheckAddEntity(const EntityToAdd& entityToAdd);
+
 private:
 	std::vector<std::uint16_t> _requiredCompTypes;
 	std::vector<std::uint32_t> _entities;

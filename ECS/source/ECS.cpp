@@ -30,6 +30,11 @@ ECS::~ECS()
 		delete it->second;
 	}
 
+	for (auto it = _pSystems.begin(); it != _pSystems.end(); it++)
+	{
+		delete *it;
+	}
+
 	delete _pEntityManager;
 }
 
@@ -45,21 +50,32 @@ std::uint16_t ECS::LoadScene(const Scene& scene)
 
 		for (int i = 0; i < entitiesToload.size(); i++)
 		{
+			System::EntityToAdd systemData{};
 			std::uint32_t newEntity = _pEntityManager->CreateEntity();
+			systemData.entity = newEntity;
 			auto compsToLoad = entitiesToload[i]->GetComponents();
 
 			for (int j = 0; j < compsToLoad.size(); j++)
 			{
 				//check if compManager exists for this type of component
-				auto compManager = _compManagers[compsToLoad[j]->GetTypeId()];
+				auto compType = compsToLoad[j]->GetTypeId();
+				auto compManager = _compManagers[compType];
 				if (compManager == nullptr)
 				{
-					compManager = _compManagers[compsToLoad[j]->GetTypeId()] = new ComponentManager();
+					compManager = _compManagers[compType] = new ComponentManager();
 				}
 				Component* loadedComp = compManager->LoadComponent(newEntity, compsToLoad[j]);
+				System::EntityToAdd::ComponentToAdd systemCompData{};
+				systemCompData.type = compType;
+				systemCompData.comp = loadedComp;
+				systemData.comps.push_back(systemCompData);
 			}
 
 			loadedEntities.push_back(newEntity);
+			for (System* system : _pSystems)
+			{
+				system->CheckAddEntity(systemData);
+			}
 		}
 
 		_loadedScenes.emplace(sceneId, loadedEntities);
