@@ -23,6 +23,6 @@ private:
 	int _data;
 };
 
-RegisterComponent(TestComponent)
+RegisterComponent(TestComponent,0)
 
 #endif

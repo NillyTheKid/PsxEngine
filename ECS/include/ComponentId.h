@@ -2,6 +2,8 @@
 
 class Component;
 
+#ifndef GET_COMPONENT_ID
+#define GET_COMPONENT_ID
 template<typename T>
 constexpr unsigned short GetComponentId()
 {
@@ -9,13 +11,14 @@ constexpr unsigned short GetComponentId()
 	throw ComponentIdException();
 	return -1;
 }
+#endif
 
-#define RegisterComponent(ComponentType) \
+#define RegisterComponent(ComponentType, TypeId) \
 	template<> \
 	constexpr unsigned short GetComponentId<ComponentType>() \
 	{ \
 		static_cast<Component*>((ComponentType*)0); \
-		return __COUNTER__; \
+		return TypeId; \
 	}
 
 #define DefineGetComponentId(ComponentType) \

@@ -13,6 +13,7 @@
 
 #include "Scene.h"
 #include "Entity.h"
+#include "PrintComponent.h"
 #include "TestComponent.h"
 #include "TestSystem.h"
 
@@ -79,6 +80,7 @@ int main(int argc, char* argv[])
 		Entity* testEntity = testScene.CreateEntity();
 		TestComponent* testComp = testEntity->CreateComponent<TestComponent>();
 		testComp->SetData(5);
+		testEntity->CreateComponent<PrintComponent>(); //Shouldnt have to temp store the comp if it doesnt require any interactions
 
 		Scene testScene2{};
 		auto ent2 = testScene2.CreateEntity();
