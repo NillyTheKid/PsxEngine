@@ -38,6 +38,8 @@ void Engine::Run()
 			ParseEvent(event);
 		}
 
+		//TODO: Calculate deltatime and pass
+		_ecs->UpdateSystems(0.0f);
 		_rendering->Render();
 	}
 }

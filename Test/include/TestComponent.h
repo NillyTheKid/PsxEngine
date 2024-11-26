@@ -17,6 +17,7 @@ public:
 	TestComponent* Clone() override;
 
 	void SetData(int data);
+	int GetData() const;
 
 private:
 	//static const unsigned short _typeId = GetComponentId<TestComponent>();

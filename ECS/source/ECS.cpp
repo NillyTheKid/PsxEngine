@@ -106,3 +106,12 @@ void ECS::UnloadScene(std::uint16_t id)
 
 	_loadedScenes.erase(id);
 }
+
+void ECS::UpdateSystems(const float& deltaTime)
+{
+	//TODO: Figure out where to get deltaTime from here
+	for (System* system : _pSystems)
+	{
+		system->UpdateLoop(deltaTime);
+	}
+}

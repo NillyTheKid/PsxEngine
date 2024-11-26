@@ -45,3 +45,18 @@ void System::CheckAddEntity(const System::EntityToAdd& entityToAdd)
 		_pComponents[i].push_back(compsToAdd[i]);
 	}
 }
+
+void System::UpdateLoop(const float& deltaTime)
+{
+	for (int i = 0; i < _entities.size(); i++)
+	{
+		std::vector<Component*> componentList{};
+		//Load components per entity into the list
+		for (int j = 0; j < _pComponents.size(); j++)
+		{
+			componentList.push_back(_pComponents[j][i]);
+		}
+
+		Update(deltaTime, componentList);
+	}
+}

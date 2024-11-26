@@ -32,3 +32,8 @@ void TestComponent::SetData(int data)
 {
 	_data = data;
 }
+
+int TestComponent::GetData() const
+{
+	return _data;
+}

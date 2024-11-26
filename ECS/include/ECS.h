@@ -22,6 +22,8 @@ public:
 	std::uint16_t LoadScene(const Scene& scene);
 	void UnloadScene(std::uint16_t id);
 
+	void UpdateSystems(const float& deltaTime);
+
 	template<class T> T* CreateSystem()
 	{
 		T* result = new T();

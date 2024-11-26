@@ -29,6 +29,10 @@ public:
 	System operator=(System&& other) = delete;
 
 	void CheckAddEntity(const EntityToAdd& entityToAdd);
+	void UpdateLoop(const float& deltaTime);
+
+protected:
+	virtual void Update(const float& deltaTime, const std::vector<Component*>& pComps) = 0;
 
 private:
 	std::vector<std::uint16_t> _requiredCompTypes;
