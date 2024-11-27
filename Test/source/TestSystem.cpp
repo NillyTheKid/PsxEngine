@@ -18,5 +18,6 @@ void TestSystem::Update(const float& deltaTime, const std::vector<Component*>& p
 {
 	TestComponent* testComp = (TestComponent*)pComps[0];
 
-	std::cout << testComp->GetData() << "\n";
+	std::cout << "Data: " << testComp->GetData() << "\n";
+	std::cout << "DeltaTime: " << deltaTime << "\n";
 }

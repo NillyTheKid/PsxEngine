@@ -7,6 +7,7 @@
 #include <SDL.h>
 
 #include <iostream>
+#include <chrono>
 
 namespace
 {
@@ -30,17 +31,21 @@ Engine::~Engine()
 
 void Engine::Run()
 {
+	auto prevTime = std::chrono::steady_clock::now().time_since_epoch();
 	SDL_Event event;
 	while (_isRunning)
 	{
+		auto currTime = std::chrono::steady_clock::now().time_since_epoch();
 		while (SDL_PollEvent(&event))
 		{
 			ParseEvent(event);
 		}
 
-		//TODO: Calculate deltatime and pass
-		_ecs->UpdateSystems(0.0f);
+		float deltaTime = std::chrono::duration_cast<std::chrono::milliseconds>(currTime - prevTime).count() / 1000.0f;
+		_ecs->UpdateSystems(deltaTime);
 		_rendering->Render();
+
+		prevTime = currTime;
 	}
 }
 
