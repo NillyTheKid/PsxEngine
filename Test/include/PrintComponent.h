@@ -19,6 +19,6 @@ private:
 	//static const unsigned short _typeId = GetComponentId<TestComponent>();
 };
 
-RegisterComponent(PrintComponent,1)
+RegisterComponent(PrintComponent,2)
 
 #endif
