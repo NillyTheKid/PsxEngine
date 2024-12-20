@@ -3,6 +3,8 @@
 #include "Rendering.h"
 #include <functional>
 
+class System;
+
 class GameRendering : public Rendering
 {
 public:
@@ -24,6 +26,7 @@ public:
 
 private:
 	Window* _activeWindow;
+	System* _pRenderSystem;
 	std::function<void()> _closeWindowCallback;
 };
 

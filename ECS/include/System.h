@@ -29,7 +29,7 @@ public:
 	System operator=(System&& other) = delete;
 
 	void CheckAddEntity(const EntityToAdd& entityToAdd);
-	void UpdateLoop(const float& deltaTime);
+	virtual void UpdateLoop(const float& deltaTime);
 
 protected:
 	virtual void Update(const float& deltaTime, const std::vector<Component*>& pComps) = 0;
